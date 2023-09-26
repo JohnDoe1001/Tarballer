@@ -1,10 +1,10 @@
 #!/bin/sh
 
 tarballer() {
-    echo Welcome to the Tarballer 1.0!
+    echo Welcome to the Tarballer 0.3.3!
     echo Please specifiy the path to your tarball.
     read tarball 
-    if $tar = /* ; then
+    if $tarball = /* ; then
         tar -zxvf $tarball || tar -jxvf $tarball
         cd $tarball
         ./configure
