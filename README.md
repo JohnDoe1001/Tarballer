@@ -4,8 +4,9 @@ A simple script that automates the compilation of .tar.* files.
 Download instructions:
 
 a.
-  1. Click the "Tarballer vx.x.x.sh" file to download.
-  2. Run the "Tarballer vx.x.x.sh" file.
+  1. Click the "Tarballer vx.x.x.sh" file.
+  2. Click the ... button, then click Download.
+  3. Run the "Tarballer vx.x.x.sh" file.
 
 b. 
   1. Find the "Release" section
