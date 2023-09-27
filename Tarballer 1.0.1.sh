@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #debug
-set -x
+set +x
 
 sudo apt-get update
 sudo apt-get install whiptail
