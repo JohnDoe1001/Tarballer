@@ -24,17 +24,6 @@ tarball () {
 			sleep 3
 			clear
 			tarballer
-			
-#cd $tar
-#if [["$tar" = "/*"]]; then
-#	tar -zxvf $tar || tar -jxvf $tar
-#	./configure
-#	make
-#	sudo make install
-#else
-#       clear
-#       tarball
-#fi
 }
 
 tarball
