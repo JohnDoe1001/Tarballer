@@ -13,4 +13,4 @@ b.
   3. Find the file "Tarballer vx.x.x.sh" and click it to download
   4. Run the "Tarballer vx.x.x.sh" file
 
-#####Note: Only the latest release will be included in the main branch. If you want to download older releases (that sucks), please visit the Releases page.
+### Note: Only the latest release will be included in the main branch. If you want to download older releases (that sucks), please visit the Releases page.
