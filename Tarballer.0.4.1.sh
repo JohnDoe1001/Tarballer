@@ -9,9 +9,7 @@ sudo apt-get upgrade
 sudo apt-get check
 
 tarball () {
-	echo Welcome to the Tarballer 0.4.1!
-	echo Please specifiy the path to your tarball (with root).
-	read tar
+    tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 0.5!" 3>&1 1>&2 2>&3)
 	while :
 		if [[-d $tar]];
 		then
@@ -21,13 +19,15 @@ tarball () {
 			sudo make install
 			if [[$? -ne 0]];
 			then
-				echo Installation succeed.
+				echo Installation succeed. > good
+                whiptail --textbox good 20 25
 			else
-				echo Installaton failed.
+				echo Installaton failed. > bad
+                whiptail --textbox bad 20 25
 			fi	
 		else
-			echo Invalid directory, please try again.
-			sleep 3
+			echo Invalid directory, please try again. > dir
+            whiptail --textbox dir 30 35
 			clear
 			tarballer
 }
