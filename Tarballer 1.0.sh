@@ -13,13 +13,20 @@ tarball () {
 	while :
 		if [[-d $tar]];
 		then
-			tar -zxvf $tar || tar -jxvf $tar
-			./configure
-			make
-			sudo make install
+                        a=${cd $tar}
+			b=${tar -zxvf $tar || tar -jxvf $tar}
+			c=${./configure}
+			d=${make}
+			e=${sudo make install}
+                        whiptail --gauge "Redirecting to the dỉrectory..." 15 80 $a
+			whiptail --gauge "Untar in progress..." 15 80 $b
+                        whiptail --gauge "Configuring..." 15 80 $c
+			whiptail --gauge "Compiling..." 15 80 $d
+                        whiptail --gauge "Installing..." 15 80 $e
+			whiptail --msgbox "Installation completed!" 40 40
 			if [[$? -ne 0]];
 			then
-				echo Installation succeed. > good
+				echo "No error found! Good for you!" > good
                 whiptail --textbox good 20 25
 			else
 				echo Installaton failed. > bad
