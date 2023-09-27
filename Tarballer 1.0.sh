@@ -11,7 +11,7 @@ sudo apt-get check
 tarball () {
     tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 0.5!" 3>&1 1>&2 2>&3)
 	while :
-		if [[-d $tar]];
+		if [[ -d $tar ]];
 		then
                         a=${cd $tar}
 			b=${tar -zxvf $tar || tar -jxvf $tar}
