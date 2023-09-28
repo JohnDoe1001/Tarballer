@@ -1,15 +1,14 @@
 #!/bin/sh
 
-#debug
-set +x
+# To change the interface, search for "lol" (without the quotes) and change the function "tar_gui" to "tar_cli"
 
 sudo apt-get update
 sudo apt-get install whiptail
 sudo apt-get upgrade
 sudo apt-get check
 
-tarball () {
-    tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 0.5!" 3>&1 1>&2 2>&3)
+tar_gui () {
+    tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 1.1!" 3>&1 1>&2 2>&3)
 	while :
 	do
 		if [[ -d $tar ]];
@@ -25,7 +24,7 @@ tarball () {
 			whiptail --gauge "Compiling..." 15 80 "$d"
                         whiptail --gauge "Installing..." 15 80 "$e"
 			whiptail --msgbox "Installation completed!" 40 40
-			if [[ $? -ne 0 ]];
+			if [[ $? -eq 0 ]];
 			then
 				echo "No error found! Good for you!" > good
                 whiptail --textbox good 20 25
@@ -37,9 +36,36 @@ tarball () {
 			echo Invalid directory, please try again. > dir
             whiptail --textbox dir 30 35
 			clear
-			tarballer
+			tar_gui
         	fi
         done
 }
 
-tarball
+# for debugging purposes
+tar_cli () {
+echo "Welcome to the Tarballer 1.1!"
+echo "Please specify the path to the .tar.* file."
+read tarcli
+	while :
+ 	do
+  		if [[ -d $tarcli ]];
+		then
+  			cd $tar || exit
+  			tar -zxvf "$tar" || tar -jxvf "$tar"
+  			./configure
+  			make
+  			sudo make install
+     			if [[ $? -eq 0 ]];
+			then
+				echo "No error found! Good for you!"
+    			else
+				echo "Installaton failed."
+    			fi
+       		else
+			echo Invalid directory, please try again.
+   		fi
+	done
+}
+
+# lol
+tar_gui
