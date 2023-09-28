@@ -13,22 +13,22 @@ tar_gui () {
                 x=$x+1
 		if [ -d "$tar" ];
 		then
-                        a=$(cd "$tar" || exit)
+            a=$(cd "$tar")
 			b=$(sudo mkdir ./$RANDOM)
-			c=$(tar -C ./"$b" -zxvf "$tar" || tar -C ./"$b" -jxvf "$tar" || tar -C ./"$b" -xzvf "$tar")
+		    c=$(tar -C ./"$b" -zxvf "$tar" || tar -C ./"$b" -jxvf "$tar" || tar -C ./"$b" -xzvf "$tar")
 			d=$(./configure)
 			e=$(make)
 			f=$(sudo make install)
-                        g=$(sudo rm -d ./"$b")
-                        whiptail --gauge "Redirecting to the dỉrectory..." 15 80 "$a"
+            g=$(sudo rm -d ./"$b")
+            whiptail --gauge "Redirecting to the dỉrectory..." 15 80 "$a"
 			whiptail --gauge "Creating temporary directory..." 15 80 "$b"
 			whiptail --gauge "Decompressing..." 15 80 "$c"
-                        whiptail --gauge "Configuring..." 15 80 "$d"
+            whiptail --gauge "Configuring..." 15 80 "$d"
 			whiptail --gauge "Compiling..." 15 80 "$e"
-                        whiptail --gauge "Installing..." 15 80 "$f"
+            whiptail --gauge "Installing..." 15 80 "$f"
 			whiptail --gauge "Finishing installation..." 15 80 "$g"
-			whiptail --msgbox "Installation completed!" 40 40
-			if [ $? -ne 0 ]
+			whiptail --msgbox "Installation completed!" 40 40)
+			if [ $? -eq 0 ]
 			then
 				echo "No error found! Good for you!" > good
                 whiptail --textbox good 20 25
@@ -64,7 +64,7 @@ read -r tarcli
   			sudo make install
                         sudo rm -d ./"$tmptar"
      			if [ $? -eq 0 ];
-			then
+			    then
 				echo "No error found! Good for you!"
     			else
 				echo "Installaton failed."
