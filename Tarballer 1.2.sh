@@ -7,19 +7,19 @@ sudo apt-get check
 
 tar_gui () {
     tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 1.1!" 3>&1 1>&2 2>&3)
-    echo $tar
+    echo "$tar"
 	while x=1:
 	do
                 x=$x+1
-		if [[ -d $tar ]];
+		if [ -d "$tar" ];
 		then
-                        a=$("cd $tar || exit")
+                        a=$(cd "$tar" || exit)
 			b=$(sudo mkdir ./$RANDOM)
-			c=$(tar -C ./$b -zxvf "$tar" || tar -C ./$b -jxvf "$tar" || tar -C ./$b -xzvf "$tar")
+			c=$(tar -C ./"$b" -zxvf "$tar" || tar -C ./"$b" -jxvf "$tar" || tar -C ./"$b" -xzvf "$tar")
 			d=$(./configure)
 			e=$(make)
 			f=$(sudo make install)
-                        g=$(sudo rm -d ./$b)
+                        g=$(sudo rm -d ./"$b")
                         whiptail --gauge "Redirecting to the dỉrectory..." 15 80 "$a"
 			whiptail --gauge "Creating temporary directory..." 15 80 "$b"
 			whiptail --gauge "Decompressing..." 15 80 "$c"
@@ -28,7 +28,7 @@ tar_gui () {
                         whiptail --gauge "Installing..." 15 80 "$f"
 			whiptail --gauge "Finishing installation..." 15 80 "$g"
 			whiptail --msgbox "Installation completed!" 40 40
-			if [[ $? -eq 0 ]];
+			if [ $? -ne 0 ]
 			then
 				echo "No error found! Good for you!" > good
                 whiptail --textbox good 20 25
@@ -50,20 +50,20 @@ exit
 tar_cli () {
 echo "Welcome to the Tarballer 1.2!"
 echo "Please specify the path to the .tar.* file."
-read tarcli
+read -r tarcli
 	while x=1:
  	do
                 x=$x+1
-  		if [[ -d $tarcli ]];
+  		if [ -d "$tarcli" ];
 		then
-  			cd $tar || exit
+  			cd "$tar" || exit
                         tmptar=$(sudo mkdir ./$RANDOM)
-  			tar -C ./$tmptar -zxvf "$tar" || tar -C ./$tmptar -jxvf "$tar" || tar -C ./$tmptar -xzvf "$tar"
+  			tar -C ./"$tmptar" -zxvf "$tar" || tar -C ./"$tmptar" -jxvf "$tar" || tar -C ./"$tmptar" -xzvf "$tar"
   			./configure
   			make
   			sudo make install
-                        sudo rm -d ./tmptar
-     			if [[ $? -eq 0 ]];
+                        sudo rm -d ./"$tmptar"
+     			if [ $? -eq 0 ];
 			then
 				echo "No error found! Good for you!"
     			else
@@ -80,14 +80,8 @@ prompt=$(whiptail --title "Choose an interface to continue." --menu "Choose an i
 "Normal" "GUI" \
 "Debug mode" "CLI" \
 "Exit" 3>&1 1>&2 2>&3)
-case $prompt in:
-    "Normal") 
-	    tar_gui
-	;;
-	"Debug mode")
-        tar_cli
-    ;;
-	"Exit")
-        exit
+case $prompt in
+("Normal") tar_gui ;;
+("Debug mode") tar_cli ;;
+("Exit") exit ;;
 esac
- 
