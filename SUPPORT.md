@@ -14,6 +14,7 @@ If a number was omitted, then it means 0.
 | 1.1     | Yes                |
 | 1.0     | Yes                |
 | 1.2     | Yes                |
+| 1.2.1   | Yes                |
 
 ## Reporting a Problem
 
