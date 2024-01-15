@@ -3,7 +3,7 @@ if ! command -v whiptail --inputbox "" 10 40 --title "" &> /dev/null
 then
     sudo apt install whiptail
     sudo apt install -f
-    sudo aptupdate
+    sudo apt update
 fi
 
 
@@ -13,7 +13,7 @@ tar_gui () {
 	while x=1:
 	do
                 x=$x+1
-		if [ -d "$tar" ];
+		if [ -e -d "$tar" ];
 		then
                         a=$(cd "$tar")
 			b=$(sudo mkdir ./$RANDOM)
