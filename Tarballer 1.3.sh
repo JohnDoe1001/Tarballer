@@ -1,21 +1,23 @@
 #!/bin/sh
+if ! command -v whiptail --inputbox "" 10 40 --title "" &> /dev/null
+then
+    sudo apt install whiptail
+    sudo apt install -f
+    sudo aptupdate
+fi
 
-sudo apt-get update
-sudo apt-get install whiptail
-sudo apt-get upgrade
-sudo apt-get check
 
 tar_gui () {
-    tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 1.1!" 3>&1 1>&2 2>&3)
+    tar=$(whiptail --inputbox "Please specify the path to the .tar.* file." 10 40 --title "Welcome to the Tarballer 1.3!" 3>&1 1>&2 2>&3)
     echo "$tar"
 	while x=1:
 	do
                 x=$x+1
 		if [ -d "$tar" ];
 		then
-            a=$(cd "$tar")
+                        a=$(cd "$tar")
 			b=$(sudo mkdir ./$RANDOM)
-		    c=$(tar -C ./"$b" -zxvf "$tar" || tar -C ./"$b" -jxvf "$tar" || tar -C ./"$b" -xzvf "$tar")
+		        c=$(tar -C ./"$b" -zxvf "$tar" || tar -C ./"$b" -jxvf "$tar" || tar -C ./"$b" -xzvf "$tar")
 			d=$(./configure)
 			e=$(make)
 			f=$(sudo make install)
